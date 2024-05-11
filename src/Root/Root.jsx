@@ -7,7 +7,7 @@ import Footer from '../Components/Footer';
 const Root = () => {
     return (
         <div>
-            <div className=''>
+            <div className='font-Jost'>
                 <Header></Header>
                 <Outlet></Outlet>
             </div>

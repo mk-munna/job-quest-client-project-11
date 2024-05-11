@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div>
             <footer className="bg-white dark:bg-gray-900">
-                <div className="container p-6 mx-auto">
+                <div className="w-[95%] p-6 mx-auto">
                     <div className="lg:flex">
                         <div className="w-full -mx-6 lg:w-2/5">
                             <div className="px-6">
@@ -15,7 +15,7 @@ const Footer = () => {
                                     </a>
                                     <p className='font-semibold text-xl'>JobQuest</p>
                                 </div>
-                                <p className="max-w-sm mt-2 text-gray-500 dark:text-gray-400">Join 31,000+ other and never miss out on new tips, tutorials, and more.</p>
+                                <p className="max-w-sm mt-2 text-gray-500 dark:text-gray-400">Explore 31,000+ jobs and never miss out on new job offer, never miss to apply .</p>
 
                                 <div className="flex mt-6 -mx-2">
                                     <a href="#"

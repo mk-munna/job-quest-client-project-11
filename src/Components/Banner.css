@@ -1,0 +1,9 @@
+select option:hover {
+    background-color: green !important;
+    color: white;
+}
+
+select option:checked {
+    background-color:#1CA774;
+    color: white;
+}
