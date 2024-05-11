@@ -17,10 +17,15 @@ export default {
       },
       colors: {
         "primary": "#1CA774",
+        "primary2": "#309670",
         "secondary": "#E5F4F0",
-        "dark": "#0F172A",
+        "dark": "#17292c",
         "heading": "#05264E",
-        "Description": "#4F5E64"
+        "Description": "#4F5E64",
+        "Description2": "#abacab",
+        "heading2": '#CBCCD5',
+        "dp":"#9CA3AF",
+        "db":"#E5E7EB",
       }
     },
   },

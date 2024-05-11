@@ -3,11 +3,11 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            <footer className="bg-white dark:bg-gray-900">
+            <footer className="bg-white dark:bg-dark">
                 <div className="w-[95%] p-6 mx-auto">
                     <div className="lg:flex">
                         <div className="w-full -mx-6 lg:w-2/5">
-                            <div className="px-6">
+                            <div className="lg:pr-24 px-6">
                                 <div className='flex items-center'>
                                     <a href="#">
                                         <img className="w-[50px]" src="https://i.ibb.co/3pCmNwH/image-removebg-preview-2.png" alt="" />

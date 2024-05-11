@@ -26,6 +26,9 @@ li>a:hover::after {
 .active::after {
     transform: scale(1);
 }
+.dark li>a::after{
+    background: yellow;
+}
 /* a:active {
     transform: scale(0.95);
     transition: .1s;
