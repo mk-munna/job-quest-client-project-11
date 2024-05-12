@@ -14,6 +14,8 @@ import Lottie from 'lottie-react';
 import upload from '../../public/upload.json'
 import { FaRegMoon } from 'react-icons/fa';
 import { CiLight } from 'react-icons/ci';
+import toast, { Toaster } from 'react-hot-toast';
+import { Tooltip } from 'react-tooltip'
 const Header = () => {
     const { user, loading } = useContext(AuthContext)
     const themeFromLocalStorage = localStorage.getItem("theme")
@@ -85,9 +87,10 @@ const Header = () => {
                         <div className="skeleton w-8 h-8 rounded-full shrink-0"></div>
                     ) : (
                         user ? (
-                            <div className="tooltip flex items-center gap-2  tooltip-left" data-tip={user?.displayName || 'Unknown'}>
+                                <div className=" flex items-center gap-2 ">
+                                    <Tooltip id="my-tooltip" />
                                 <div>
-                                    <div tabIndex={0} role="button" className=" m-1">
+                                        <div data-tooltip-id="my-tooltip" place="top" data-tooltip-content={user?.displayName || 'Unknown'} tabIndex={0} role="button" className=" m-1">
                                         {
                                             user?.photoURL ? (
                                                 <img src={user?.photoURL} alt="" className="w-8 h-8 rounded-full " />
@@ -121,6 +124,7 @@ const Header = () => {
                     <button className='flex items-center gap-2 bg-primary dark:bg-[#309670] rounded-md px-4 py-2 text-sm text-white dark:text-gray-200 font-semibold font-Jost'><Lottie style={{ width: 30 }} animationData={upload}></Lottie> Upload Resume</button>
                 </div>
             </div>
+            <div><Toaster /></div>
         </div>
     );
 };

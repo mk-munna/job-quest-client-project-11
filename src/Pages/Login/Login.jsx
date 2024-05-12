@@ -15,7 +15,7 @@ const Login = () => {
     const [openModal, setOpenModal] = useState(false);
 
     const onCloseModal = () => {
-        setOpenModal(false);
+        setOpenModal(!openModal);
     }
 
     const handleSubmit = (e) => {
@@ -26,12 +26,15 @@ const Login = () => {
             .then(result => {
                 setLoading(false)
                 console.log(result.user);
-                navigate(location?.state || '/')
+                // navigate(location?.state || '/')
                 toast.success('Successfully logged in!')
+                setOpenModal(false)
+                
 
             }).catch(err => {
                 console.log(err.message);
                 setLoading(false);
+                setOpenModal(true)
                 console.log(err.message);
                 const firebaseError = err.message
                 if (firebaseError.includes('invalid')) {
@@ -49,14 +52,14 @@ const Login = () => {
             .then(result => {
                 setLoading(false)
                 setReload(true)
+                setOpenModal(false)
                 toast.success('Successfully logged in!')
-                setTimeout(() => {
-                    navigate(location?.state || '/')
-                }, 2000);
+                // navigate(location?.state || '/')
                 console.log(result.user);
             }).catch(err => {
                 setLoading(false)
                 console.log(err.message);
+                setOpenModal(true)
             })
     }
     return (
@@ -82,7 +85,7 @@ const Login = () => {
                         <div className='flex justify-center'>
                             <Link onClick={() => setOpenModal(false)} to={'/sign-up'} className="dark:text-white font-semibold  text-primary text-sm underline">Sign up</Link>
                         </div>
-                        <div><Toaster></Toaster> </div>
+                        <div><Toaster /></div>
                     </div>
                 </Modal.Body>
             </Modal>
