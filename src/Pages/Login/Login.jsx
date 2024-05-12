@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import login1 from '../../../public/login1.json'
 import Lottie from 'lottie-react'
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
@@ -80,10 +80,11 @@ const Login = () => {
                 setOpenModal(true)
             })
     }
+    const emailInputRef = useRef();
     return (
         <div className=''>
             <button className=' flex gap-3 dark:text-heading2 text-heading hover:underline cursor-pointer' onClick={() => setOpenModal(true)}>Sign in</button>
-            <Modal show={openModal} className='bg-secondary dark:bg-dark' size="md" onClose={onCloseModal} popup>
+            <Modal show={openModal} className='bg-secondary dark:bg-dark' size="md" onClose={onCloseModal} popup initialFocus={clicked && emailInputRef }>
                 <Modal.Header className='bg-gray-300 dark:bg-[#314949]' />
                 <Modal.Body className='bg-white dark:bg-[#1e2c2c]'>
                     <div>
@@ -93,7 +94,7 @@ const Login = () => {
                         <Lottie style={{ width: 150, marginLeft: 'auto', marginRight: 'auto' }} animationData={login1}></Lottie>
                         <h3 className="text-3xl text-center font-medium text-gray-900 dark:text-white ">LOGIN</h3>
                         <form onSubmit={handleSubmit} className="">
-                        <input className='block text-center my-[20px] mx-auto  w-[250px] py-[14px] px-[10px] focus:outline-none bg-white dark:bg-[#1e2c2c] dark:placeholder:text-gray-400 border-primary text-black dark:text-heading2 rounded-3xl placeholder:text-Description border  duration-200 focus:w-[300px] ' type="text" name="email" id="" placeholder='User Email ' />
+                        <input className='block text-center my-[20px] mx-auto  w-[250px] py-[14px] px-[10px] focus:outline-none bg-white dark:bg-[#1e2c2c] dark:placeholder:text-gray-400 border-primary text-black dark:text-heading2 rounded-3xl placeholder:text-Description border  duration-200 focus:w-[300px] ' type="text" name="email" id="" placeholder='User Email ' ref={emailInputRef}/>
                         <input className='border-primary  bg-white dark:bg-[#1e2c2c] dark:placeholder:text-gray-400 focus:outline-none block text-center my-[20px] mx-auto  w-[250px] py-[14px] text-black dark:text-heading2  px-[10px]  rounded-3xl placeholder:text-Description border  duration-200 focus:w-[300px] ' type="text" name="password" id="" placeholder='User Password' />
                         <input
                             className="block text-center my-[20px] mx-auto  bg-primary w-[250px]  py-[14px] px-[10px] outline-none active:scale-95 text-white rounded-3xl duration-200 hover:w-[251px] cursor-pointer"

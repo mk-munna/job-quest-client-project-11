@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { IoIosSearch, IoMdArrowBack } from 'react-icons/io';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
-"use client";
+
 
 import { Table } from "flowbite-react";
 import { BsMenuUp } from 'react-icons/bs';

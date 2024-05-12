@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CiHeart, CiUser } from 'react-icons/ci';
 import { VscGitStashApply } from 'react-icons/vsc';
 import { useParams } from 'react-router-dom';
+import ApplyModal from '../../Components/ApplyModal';
 
 const ViewDetails = () => {
     const [data, setData] = useState(null)
@@ -19,6 +20,7 @@ const ViewDetails = () => {
         const { _id, bannerUrl, title, salaryRange, description, postedBy, deadline, applicants, category } = data;
         const lastWord = title.split(" ").pop();
         console.log(lastWord); 
+
         return (
             <div className='bg-[#F1F5F8] dark:bg-[#1c333a]'>
                 <div className="max-w-[350px]  md:max-w-screen-sm py-20 lg:max-w-[90%] mx-auto flex flex-col lg:flex-row gap-12 justify-evenly">
@@ -34,7 +36,8 @@ const ViewDetails = () => {
                                 </div>
                                 <div>
                                     <div className='flex gap-4'>
-                                        <button className='flex items-center gap-2 bg-primary dark:bg-[#309670] rounded-md px-4 py-4 text-sm text-white dark:text-gray-200  font-Jost'><VscGitStashApply />Apply Now</button>
+                                        
+                                        <ApplyModal job={data}></ApplyModal>
                                         <button className='flex items-center gap-2 bg-[#E5EBEF] dark:bg-[#344b55] rounded-md px-4 py-4 text-sm text-black dark:text-gray-200  font-Jost'> <CiHeart />Save Job</button>
                                     </div>
                                     <div className='mt-2 flex gap-6'>
@@ -68,6 +71,7 @@ const ViewDetails = () => {
                         </div>
                     </div>
                 </div>
+                
             </div>
     );
     }

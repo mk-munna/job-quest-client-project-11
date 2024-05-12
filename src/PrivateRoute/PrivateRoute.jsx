@@ -3,6 +3,10 @@ import { AuthContext } from '../Provider/AuthContextProvider';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
+import Lottie from 'lottie-react';
+import loadingLottie from '../../public/loadingLottie.json'
+
+
 const PrivateRoute = ({ children }) => {
     const { user, openModal, setOpenModal, loading } = useContext(AuthContext);
     const location = useLocation();
@@ -18,15 +22,18 @@ const PrivateRoute = ({ children }) => {
     }, [user, location.state, navigate, setOpenModal]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div>
+                <Lottie style={{ width: 550, marginLeft: 'auto', marginRight: 'auto' }} animationData={loadingLottie}></Lottie>
+
+            </div>
+        )
     }
 
-    // Render children if user is logged in
     if (user) {
         return <div>{children}</div>;
     }
 
-    // Redirect to home if user is not logged in
     return <Navigate to="/" />;
 };
 
