@@ -5,17 +5,22 @@ import Lottie from 'lottie-react'
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineUser } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthContextProvider';
 import { FcGoogle } from 'react-icons/fc';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
-    const { login, popUpLogin, setLoading, user, setReload } = useContext(AuthContext)
-    const [openModal, setOpenModal] = useState(false);
+    const { login,id,setId,clicked,setClicked, openModal,setOpenModal, popUpLogin, setLoading, user, setReload } = useContext(AuthContext)
+    
+    const location = useLocation();
+    const navigate = useNavigate()
 
     const onCloseModal = () => {
-        setOpenModal(!openModal);
+        setOpenModal(false);
+        setId(null);
+        setClicked(false)
+
     }
 
     const handleSubmit = (e) => {
@@ -26,6 +31,13 @@ const Login = () => {
             .then(result => {
                 setLoading(false)
                 console.log(result.user);
+                if (id && clicked) {
+                    navigate(`/job/${id}`)
+                    setId(null)
+                    setClicked(false)
+                } else {
+                    navigate(location?.state || '/')
+                }
                 // navigate(location?.state || '/')
                 toast.success('Successfully logged in!')
                 setOpenModal(false)
@@ -53,9 +65,15 @@ const Login = () => {
                 setLoading(false)
                 setReload(true)
                 setOpenModal(false)
-                toast.success('Successfully logged in!')
+                if (id && clicked) {
+                    navigate(`/job/${id}`)
+                    setId(null)
+                    setClicked(false)
+                } else {
+                    navigate(location?.state || '/')
+                }
                 // navigate(location?.state || '/')
-                console.log(result.user);
+                toast.success('Successfully logged in!')
             }).catch(err => {
                 setLoading(false)
                 console.log(err.message);
@@ -69,6 +87,9 @@ const Login = () => {
                 <Modal.Header className='bg-gray-300 dark:bg-[#314949]' />
                 <Modal.Body className='bg-white dark:bg-[#1e2c2c]'>
                     <div>
+                        {
+                            clicked && <p className='mt-6 text-black dark:text-heading2 text-center text-lg'> 🙁 You have to log in first to view details </p>
+                        }
                         <Lottie style={{ width: 150, marginLeft: 'auto', marginRight: 'auto' }} animationData={login1}></Lottie>
                         <h3 className="text-3xl text-center font-medium text-gray-900 dark:text-white ">LOGIN</h3>
                         <form onSubmit={handleSubmit} className="">

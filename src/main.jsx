@@ -10,6 +10,8 @@ import Login from './Pages/Login/Login.jsx'
 import SignUp from './SignUp/SignUp.jsx'
 import AuthContextProvider from './Provider/AuthContextProvider.jsx'
 import AllJobs from './Pages/AllJobs/AllJobs.jsx'
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx'
+import ViewDetails from './Pages/ViewDetails/ViewDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
         path: '/all-jobs',
         element: <AllJobs></AllJobs>,
         loader: () => fetch('http://localhost:5000/jobs')
+      },
+      {
+        path: '/job/:id',
+        element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>
       },
     ]
   }
