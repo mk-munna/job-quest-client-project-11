@@ -42,9 +42,9 @@ const Header = () => {
 
     return (
         <div className='flex justify-between max-w-[90%] mx-auto items-center px-7 pt-6'>
-            <div className='flex ml-10 md:ml-[100px] lg:ml-0  items-center'>
-                <img className='w-[40px] md:w-[50px]' src="https://i.ibb.co/3pCmNwH/image-removebg-preview-2.png" alt="" />
-                <p className='font-medium text-heading dark:text-heading2 text-xl'>JobQuest</p>
+            <div className='flex md:ml-[100px] lg:ml-0  items-center'>
+                <img className='w-[32px] md:w-[50px]' src="https://i.ibb.co/3pCmNwH/image-removebg-preview-2.png" alt="" />
+                <p className='font-medium text-heading dark:text-heading2 text-base md:text-xl'>JobQuest</p>
             </div>
             <div className='grow flex justify-center'>
                 {
@@ -63,11 +63,11 @@ const Header = () => {
                             <img className='w-[40px] md:w-[50px]' src="https://i.ibb.co/3pCmNwH/image-removebg-preview-2.png" alt="" />
                             <p className='font-medium text-heading dark:text-heading2 text-xl'>JobQuest</p>
                         </div>
-                        <NavLink className={''} to={'/'}>Home</NavLink>
-                        <NavLink className={''} to={'/all-jobs'}>All Jobs</NavLink>
-                        <NavLink className={''} to={'/applied-jobs'}>Applied Jobs</NavLink>
-                        <NavLink className={''} to={'/add-job'}>Add A Job</NavLink>
-                        <NavLink className={''} to={'/my-jobs'}>My Jobs</NavLink>
+                        <NavLink className={''} to={'/'} onClick={() => setIsOpen(false)}>Home</NavLink>
+                        <NavLink className={''} to={'/all-jobs'} onClick={() => setIsOpen(false)}>All Jobs</NavLink>
+                        <NavLink className={''} to={'/applied-jobs'} onClick={() => setIsOpen(false)}>Applied Jobs</NavLink>
+                        <NavLink className={''} to={'/add-job'} onClick={() => setIsOpen(false)}>Add A Job</NavLink>
+                        <NavLink className={''} to={'/my-jobs'} onClick={() => setIsOpen(false)}>My Jobs</NavLink>
 
                     </li>
                 </ul>
