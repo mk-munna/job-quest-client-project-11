@@ -9,6 +9,7 @@ import Home from './Pages/Home/Home.jsx'
 import Login from './Pages/Login/Login.jsx'
 import SignUp from './SignUp/SignUp.jsx'
 import AuthContextProvider from './Provider/AuthContextProvider.jsx'
+import AllJobs from './Pages/AllJobs/AllJobs.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
       {
         path: '/sign-up',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '/all-jobs',
+        element: <AllJobs></AllJobs>,
+        loader: () => fetch('http://localhost:5000/jobs')
       },
     ]
   }

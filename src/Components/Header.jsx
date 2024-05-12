@@ -77,7 +77,7 @@ const Header = () => {
                     theme ? (
                         <FaRegMoon className="text-xl cursor-pointer " onClick={() => setTheme(!theme)} />
                     ) : (
-                        <CiLight FaRegMoon className="text-2xl cursor-pointer -ml-1" onClick={() => setTheme(!theme)} />
+                        <CiLight  className="text-2xl cursor-pointer -ml-1" onClick={() => setTheme(!theme)} />
                     )
                 }
             </div>
