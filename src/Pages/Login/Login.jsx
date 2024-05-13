@@ -11,7 +11,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
-    const { login,id,setId,clicked,setClicked, openModal,setOpenModal, popUpLogin, setLoading, user, setReload } = useContext(AuthContext)
+    const { login, id, setId, clicked, setClicked, from, openModal,setOpenModal, popUpLogin, setLoading, user, setReload } = useContext(AuthContext)
     
     const location = useLocation();
     const navigate = useNavigate()
@@ -31,16 +31,22 @@ const Login = () => {
             .then(result => {
                 setLoading(false)
                 console.log(result.user);
+                toast.success('Successfully logged in!')
+                setOpenModal(false)
                 if (id && clicked) {
                     navigate(`/job/${id}`)
                     setId(null)
                     setClicked(false)
-                } else {
+                    return
+                }
+                if (from) {
+                    navigate(from)
+                    setFrom(null)
+                }
+                else {
                     navigate(location?.state || '/')
                 }
                 // navigate(location?.state || '/')
-                toast.success('Successfully logged in!')
-                setOpenModal(false)
                 
 
             }).catch(err => {
@@ -90,6 +96,9 @@ const Login = () => {
                     <div>
                         {
                             clicked && <p className='mt-6 text-black dark:text-heading2 text-center text-lg'> 🙁 You have to log in first to view details </p>
+                        }
+                        {
+                            
                         }
                         <Lottie style={{ width: 150, marginLeft: 'auto', marginRight: 'auto' }} animationData={login1}></Lottie>
                         <h3 className="text-3xl text-center font-medium text-gray-900 dark:text-white ">LOGIN</h3>

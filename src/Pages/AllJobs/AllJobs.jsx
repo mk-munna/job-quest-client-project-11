@@ -11,7 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const AllJobs = () => {
     const loadedData = useLoaderData()
-    const { user, clicked, setClicked,id,setId, openModal, setOpenModal,} = useContext(AuthContext)
+    const { user, clicked, setClicked, id, setId, openModal, setOpenModal, } = useContext(AuthContext)
     const [data, setData] = useState(loadedData)
     console.log(data);
     const handleSubmit = (e) => {
@@ -21,21 +21,20 @@ const AllJobs = () => {
         const resultData = loadedData.filter(job => job.title.toUpperCase().includes(search.toUpperCase()))
         setData(resultData)
     }
-   
-const navigate = useNavigate()
+    const currentPathname = window.location.pathname;
+    const navigate = useNavigate()
     const handleViewDetails = (id) => {
         console.log('id', id);
         setClicked(true)
         setId(id)
         if (user) {
-            navigate(`/job/${id}`)
+            navigate(`/job/${id}?from=${encodeURIComponent(currentPathname)}`)
         }
         else {
             setOpenModal(true)
-            // toast.error('You have to log in first to view details ')
         }
     }
-    
+
     return (
         <div className=''>
             <div>
@@ -77,8 +76,8 @@ const navigate = useNavigate()
                                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                                     {job.title}
                                                 </Table.Cell>
-                                                <Table.Cell>{job.postingDate }</Table.Cell>
-                                                <Table.Cell>{job.deadline }</Table.Cell>
+                                                <Table.Cell>{job.postingDate}</Table.Cell>
+                                                <Table.Cell>{job.deadline}</Table.Cell>
                                                 <Table.Cell>{job.salaryRange}</Table.Cell>
                                                 <Table.Cell>
                                                     {/* <Link state={location.pathname} to={`/job/${job._id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">

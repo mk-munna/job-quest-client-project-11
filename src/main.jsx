@@ -12,6 +12,7 @@ import AuthContextProvider from './Provider/AuthContextProvider.jsx'
 import AllJobs from './Pages/AllJobs/AllJobs.jsx'
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx'
 import ViewDetails from './Pages/ViewDetails/ViewDetails.jsx'
+import AddJob from './Pages/AddJob/AddJob.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/job/:id',
         element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>
+      },
+      {
+        path: '/add-a-job' ,
+        element: <PrivateRoute><AddJob></AddJob></PrivateRoute>
       },
     ]
   }

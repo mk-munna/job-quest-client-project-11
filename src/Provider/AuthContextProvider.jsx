@@ -13,6 +13,7 @@ const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [clicked, setClicked] = useState(false)
     const [id, setId] = useState(null)
+    const [from, setFrom] = useState(null)
 
     const login = (email, password) => {
         setLoading(true)
@@ -43,7 +44,7 @@ const AuthContextProvider = ({ children }) => {
         })
     }, [reload, user])
 
-    const authInfo = { id, setId, clicked, setClicked, openModal,setOpenModal, setReload, user, setUser, popUpLogin,   updateUserProfile,signUp,loading, setLoading, login };
+    const authInfo = { id, from, setFrom, setId, clicked, setClicked, openModal,setOpenModal, setReload, user, setUser, popUpLogin,   updateUserProfile,signUp,loading, setLoading, login };
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

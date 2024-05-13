@@ -8,18 +8,21 @@ import loadingLottie from '../../public/loadingLottie.json'
 
 
 const PrivateRoute = ({ children }) => {
-    const { user, openModal, setOpenModal, loading } = useContext(AuthContext);
+    const { user, openModal, setFrom, from, setOpenModal, loading } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
-
+    const search = new URLSearchParams(location.search)
+    const fromPathname = search.get('from')
+    console.log('pathName',fromPathname)
+    console.log("console from private route")
+    const currentLocation = window.location.pathname
+    console.log ('currentLocation',currentLocation)
     useEffect(() => {
-        // Redirect if user is not logged in and trying to access a protected route
-        if (!user && location.state === '/all-jobs') {
+        // open Modal if user is not logged in and trying to access a protected route
+        if (!user) {
             setOpenModal(true);
-            toast.error('You have to log in first to view details');
-            navigate('/');
         }
-    }, [user, location.state, navigate, setOpenModal]);
+    }, [!user, fromPathname]);
 
     if (loading) {
         return (
@@ -33,8 +36,8 @@ const PrivateRoute = ({ children }) => {
     if (user) {
         return <div>{children}</div>;
     }
-
-    return <Navigate to="/" />;
+    
+    return <Navigate to={fromPathname || '/'} />;
 };
 
 export default PrivateRoute;

@@ -17,7 +17,7 @@ import { CiLight } from 'react-icons/ci';
 import toast, { Toaster } from 'react-hot-toast';
 import { Tooltip } from 'react-tooltip'
 const Header = () => {
-    const { user, loading } = useContext(AuthContext)
+    const { user,setFrom, loading } = useContext(AuthContext)
     const themeFromLocalStorage = localStorage.getItem("theme")
     const [theme, setTheme] = useState(themeFromLocalStorage);
     const [isOpen, setIsOpen] = useState(false)
@@ -39,7 +39,7 @@ const Header = () => {
             document.querySelector("html").classList.remove("dark")
         }
     }, [theme])
-
+    const currentPathname = window.location.pathname;
     return (
         <div className='flex justify-between max-w-[90%] mx-auto items-center px-7 pt-6'>
             <div className='flex md:ml-[100px] lg:ml-0  items-center'>
@@ -63,11 +63,18 @@ const Header = () => {
                             <img className='w-[40px] md:w-[50px]' src="https://i.ibb.co/3pCmNwH/image-removebg-preview-2.png" alt="" />
                             <p className='font-medium text-heading dark:text-heading2 text-xl'>JobQuest</p>
                         </div>
-                        <NavLink className={''} to={'/'} onClick={() => setIsOpen(false)}>Home</NavLink>
-                        <NavLink className={''} to={'/all-jobs'} onClick={() => setIsOpen(false)}>All Jobs</NavLink>
-                        <NavLink className={''} to={'/applied-jobs'} onClick={() => setIsOpen(false)}>Applied Jobs</NavLink>
-                        <NavLink className={''} to={'/add-job'} onClick={() => setIsOpen(false)}>Add A Job</NavLink>
-                        <NavLink className={''} to={'/my-jobs'} onClick={() => setIsOpen(false)}>My Jobs</NavLink>
+                        <NavLink className={''} to={'/'} onClick={() => {setIsOpen(false), setFrom('/')}}>Home</NavLink>
+
+
+                        <NavLink className={''} to={'/all-jobs'} onClick={() => { setIsOpen(false), setFrom('/all-jobs') }}>All Jobs</NavLink>
+
+
+                        <NavLink className={''} to={`/add-a-job?from=${encodeURIComponent(currentPathname)}`} onClick={() => { setIsOpen(false), setFrom('/add-a-job') }}>Add A Job</NavLink>
+
+
+                        <NavLink className={''} to={`/applied-jobs?from=${encodeURIComponent(currentPathname)}`} onClick={() => { setIsOpen(false), setFrom('/applied-jobs') }}>Applied Jobs</NavLink>
+
+                        <NavLink className={''} to={`/my-jobs?from=${encodeURIComponent(currentPathname)}`} onClick={() => { setIsOpen(false), setFrom('/my-jobs') }}>My Jobs</NavLink>
 
                     </li>
                 </ul>

@@ -1,9 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { VscGitStashApply } from 'react-icons/vsc';
+import { AuthContext } from '../Provider/AuthContextProvider';
+import toast from 'react-hot-toast';
 
 const ApplyModal = ({ job }) => {
     const { _id, bannerUrl, title, salaryRange, description, postedBy, deadline, applicants, category } = job
+    const {user} = useContext(AuthContext)
     const [openModal, setOpenModal] = useState(false);
     const [formData, setFormData] = useState({
         name: postedBy.name,
@@ -23,10 +26,19 @@ const ApplyModal = ({ job }) => {
     const handleSubmit = (e) => {
         console.log(formData);
     };
-
+    const currentDate = new Date();
+    console.log(currentDate)
+    console.log(deadline);
+    const buttonClicked = () => {
+        if (new Date() > new Date(deadline)) {
+            toast.error('We are sorry! Deadline is over')
+        } else {
+            setOpenModal(true)
+        }
+    }
     return (
         <div>
-            <button onClick={() => setOpenModal(true)} className='flex items-center gap-2 bg-primary dark:bg-[#309670] rounded-md px-4 py-4 text-sm text-white dark:text-gray-200  font-Jost'><VscGitStashApply />Apply Now</button>
+            <button onClick={buttonClicked} disabled={user.email === postedBy.email } className='flex items-center gap-2 bg-primary dark:bg-[#309670] rounded-md px-4 py-4 text-sm text-white dark:text-gray-200  font-Jost'><VscGitStashApply />Apply Now</button>
             <Modal show={openModal} size="md" popup onClose={() => setOpenModal(false)} initialFocus={resumeInputRef}>
                 <Modal.Header />
                 <Modal.Body>

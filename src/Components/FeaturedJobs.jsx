@@ -7,7 +7,7 @@ const FeaturedJobs = () => {
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     useEffect(() => {
         if (activeTabIndex === 0) {
-            fetch('http://localhost:5000/jobs')
+            fetch(`${import.meta.env.VITE_API_URL}/jobs`)
                 .then(res => res.json())
                 .then(data => {
                     setJobs(data);
@@ -15,7 +15,7 @@ const FeaturedJobs = () => {
                 .catch(err => console.log(err))
         }
         if (activeTabIndex === 1) {
-            fetch('http://localhost:5000/jobs?category=onsite')
+            fetch(`${import.meta.env.VITE_API_URL}/jobs?category=onsite`)
                 .then(res => res.json())
                 .then(data => {
                     setJobs(data);
@@ -45,7 +45,6 @@ const FeaturedJobs = () => {
                         <Tab className={`cursor-pointer ${activeTabIndex === 3 ? "!bg-primary font-semibold outline-none border-none !text-white px-4 py-1 !rounded-full" : "!bg-slate-100 font-semibold  outline-none border-none !text-gray-600 px-4 py-1 !rounded-full"}`}>Part - time</Tab>
                         <Tab className={`cursor-pointer ${activeTabIndex === 4 ? "!bg-primary font-semibold outline-none border-none !text-white px-4 py-1 !rounded-full" : "!bg-slate-100 font-semibold  outline-none border-none !text-gray-600 px-4 py-1 !rounded-full"}`}>Hybrid</Tab>
                     </TabList>
-
                     <TabPanel>
                         <h2>Any content 1</h2>
                     </TabPanel>
