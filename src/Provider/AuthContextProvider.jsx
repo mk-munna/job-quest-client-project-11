@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { createContext, useEffect, useState } from "react";
 import { auth } from "./firebase.config";
 import PropTypes from 'prop-types';
+import axios from "axios";
 
 export const AuthContext = createContext(null)
 
@@ -40,6 +41,10 @@ const AuthContextProvider = ({ children }) => {
 
                 setLoading(false)
                 setUser(null)
+                // axios.post(`${import.meta.env.VITE_API_URL}/logout`, userEmail, { withCredentials: true })
+                //     .then(res => {
+                //         console.log(res.data)
+                //     })
             }
         })
     }, [reload, user])

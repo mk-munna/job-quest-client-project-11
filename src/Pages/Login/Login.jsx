@@ -10,6 +10,7 @@ import { AuthContext } from '../../Provider/AuthContextProvider';
 import { FcGoogle } from 'react-icons/fc';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 const Login = () => {
     const { login, id, setId, clicked, setClicked, from, openModal,setOpenModal, popUpLogin, setLoading, user, setReload } = useContext(AuthContext)
     
@@ -32,6 +33,10 @@ const Login = () => {
                 setLoading(false)
                 console.log(result.user);
                 toast.success('Successfully logged in!')
+                // axios.post(`${import.meta.env.VITE_API_URL}/jwt`, user, {withCredentials: true})
+                //     .then(res => {
+                //         console.log(res.data)
+                //     })
                 setOpenModal(false)
                 if (id && clicked) {
                     navigate(`/job/${id}`)
