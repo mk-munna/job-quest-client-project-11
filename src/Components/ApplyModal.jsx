@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 const ApplyModal = ({ job }) => {
-    const { _id, bannerUrl, title, salaryRange, description, postedBy, deadline, applicants, category } = job
+    const { _id, bannerUrl, title, salaryRange, postingDate, description, postedBy, deadline, applicants, category } = job
     const { user } = useContext(AuthContext)
 
     const [openModal, setOpenModal] = useState(false);
@@ -41,15 +41,42 @@ const ApplyModal = ({ job }) => {
     })
 
     const handleSubmit = async () => {
+
         console.log(formData);
         setOpenModal(false)
-        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/apply/${_id}`, {
-            formData
+        const applicantsData = {
+            applicantsName: formData.name,
+            applicantsEmail: formData.email,
+            applicantsResumeLink: formData.link,
+            status: 'pending',
+            jobId: _id,
+            postedBy: postedBy,
+            bannerUrl,
+            title,
+            salaryRange,
+            postingDate,
+            deadline,
+            description,
+            category
+        }
+    // console.log(applicantsData)
+        const  data  = await axios.post(`${import.meta.env.VITE_API_URL}/apply`, {
+            applicantsData
         })
             .then(data => {
-            console.log(data)
+                console.log(data.data)
+                if (data.data.insertedId) {
+                    toast.success('Successfully applied!')
+                    axios.patch(`${import.meta.env.VITE_API_URL}/applicants/${_id}`)
+                        .then(data => {
+                            console.log(data.data)
+                            // queryClient.invalidateQueries('jobs')
+                        })
+                    
+                    
+                }
         })
-        console.log(data)
+        // console.log(data)
 
         // await mutateAsync(
         //     {
@@ -62,10 +89,10 @@ const ApplyModal = ({ job }) => {
         //             queryClient.invalidateQueries('jobs')
         //         }
         //     })
-        setFormData({
-            ...formData,
-            link: ''
-        });
+        // setFormData({
+        //     ...formData,
+        //     link: ''
+        // });
     };
     const currentDate = new Date();
     console.log(currentDate)

@@ -76,6 +76,8 @@ const Header = () => {
 
                         <NavLink className={''} to={`/my-jobs?from=${encodeURIComponent(currentPathname)}`} onClick={() => { setIsOpen(false), setFrom('/my-jobs') }}>My Jobs</NavLink>
 
+                        <NavLink className={''} to={'/blogs'} onClick={() => { setIsOpen(false), setFrom('/blogs') }}>Blogs</NavLink>
+
                     </li>
                 </ul>
             </div>

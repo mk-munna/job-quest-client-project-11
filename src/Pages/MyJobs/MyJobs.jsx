@@ -24,7 +24,7 @@ const MyJobs = () => {
         queryKey: ['my-jobs']
     })
     const getData = async () => {
-        const { data } = await axios.get(`http://localhost:5000/my-jobs?email=${user.email}`)
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/my-jobs?email=${user.email}`)
         return data
     }
     console.log(loadedData)
@@ -73,17 +73,10 @@ const MyJobs = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                
-                fetch(`https://asian-escape-server.vercel.app/touristSpot/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        if (data.deletedCount > 0) {
+                axios.delete(`${import.meta.env.VITE_API_URL}/delete/${id}`)
+                    .then(response => {
+                        console.log(response.data)
+                        if (response.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your Tourist spot has been deleted.",
@@ -91,11 +84,13 @@ const MyJobs = () => {
                             });
                         }
                     })
-
+                    .catch(error => {
+                        console.error('Error deleting job:', error);
+                    });
             }
         });
-
     }
+
     if (isLoading) {
         return (
             <div>
@@ -157,7 +152,7 @@ const MyJobs = () => {
                                         const { postingDate, deadline } = job
                                         // Convert postingDate 
                                         const postingDateString = new Date(postingDate).toLocaleDateString();
-                                        console.log({postingDateString});
+                                        // console.log({postingDateString});
                                         // Convert deadline 
                                         const deadlineString = new Date(deadline).toLocaleDateString();
                                         return (

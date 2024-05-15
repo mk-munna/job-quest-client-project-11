@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CiBadgeDollar, CiUser } from 'react-icons/ci';
+import { AuthContext } from '../Provider/AuthContextProvider';
+import { useNavigate } from 'react-router-dom';
+const JobCart = ({ job }) => {
+    const { user, clicked, setClicked, id, setId, openModal, setOpenModal, } = useContext(AuthContext)
+    // view details handle
+    const currentPathname = window.location.pathname;
+    const navigate = useNavigate()
+    const handleViewDetails = (id) => {
+        console.log('id', id);
+        setClicked(true)
+        setId(id)
+        if (user) {
+            navigate(`/job/${id}?from=${encodeURIComponent(currentPathname)}`)
+        }
+        else {
+            setOpenModal(true)
+        }
+    }
 
-const JobCart = ({job}) => {
     return (
         <div className='border-[1px] rounded-lg dark:border-gray-500 p-4 '>
             <div>

@@ -18,6 +18,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MyJobs from './Pages/MyJobs/MyJobs.jsx'
 import UpdateJob from './Pages/UpdateJob/UpdateJob.jsx'
+import AppliedJobs from './Pages/AppliedJobs/AppliedJobs.jsx'
+import Blogs from './Pages/Blogs/Blogs.jsx'
+import Blog1 from './Components/Blog1.jsx'
+import Blog2 from './Components/Blog2.jsx'
+import Blog3 from './Components/Blog3.jsx'
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
@@ -52,6 +57,26 @@ const router = createBrowserRouter([
       {
         path: '/update/:id' ,
         element: <PrivateRoute><UpdateJob></UpdateJob></PrivateRoute>
+      },
+      {
+        path: '/applied-jobs' ,
+        element: <PrivateRoute><AppliedJobs></AppliedJobs></PrivateRoute>
+      },
+      {
+        path: '/blogs',
+        element: <Blogs></Blogs>
+      },
+      {
+        path: '/blog1',
+        element: <Blog1></Blog1>
+      },
+      {
+        path: '/blog2',
+        element: <Blog2></Blog2>
+      },
+      {
+        path: '/blog3',
+        element: <Blog3></Blog3>
       },
     ]
   }

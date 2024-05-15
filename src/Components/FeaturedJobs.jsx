@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { CiBadgeDollar, CiUser } from 'react-icons/ci';
-import { useNavigate } from 'react-router-dom';
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { AuthContext } from '../Provider/AuthContextProvider';
+
 import JobCart from './JobCart';
 
 const FeaturedJobs = () => {
-    const { user, clicked, setClicked, id, setId, openModal, setOpenModal, } = useContext(AuthContext)
+
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     // data loading
 
@@ -28,20 +28,7 @@ const FeaturedJobs = () => {
         console.log("Tab changed to index:", index);
     };
 
-    // view details handle
-    const currentPathname = window.location.pathname;
-    const navigate = useNavigate()
-    const handleViewDetails = (id) => {
-        console.log('id', id);
-        setClicked(true)
-        setId(id)
-        if (user) {
-            navigate(`/job/${id}?from=${encodeURIComponent(currentPathname)}`)
-        }
-        else {
-            setOpenModal(true)
-        }
-    }
+
 
     return (
         <div className=''>

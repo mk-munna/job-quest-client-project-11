@@ -53,32 +53,37 @@ const UpdateJob = () => {
         const postingDate = startDate
         const deadline = jobDeadline
         const applicants = parseInt(form.applicants.value);
-        const newJob = { bannerUrl, title, category, postedBy, description, salaryRange, postingDate, deadline, applicants }
-        console.log(newJob);
-        fetch(`${import.meta.env.VITE_API_URL}/add-job`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newJob)
-        })
-            .then(res => res.json())
+        const newJob = { bannerUrl, title, category, postedBy, description : desc, salaryRange, postingDate, deadline, applicants }
+        console.log({ newJob });
+        try {
+            axios.put(`${import.meta.env.VITE_API_URL}/update/${id}`, newJob)
             .then(data => {
-                console.log(data)
-                if (data.insertedId) {
+                console.log(data.data)
+                if (data.data.modifiedCount === 1) {
                     Swal.fire({
-                        title: 'Added Successfully!',
-                        text: 'Your job data has been added successfully',
+                        title: 'Updated Successfully!',
+                        text: 'Your job data has been updated successfully',
                         icon: 'success',
                         iconColor: "#1CA774",
                         confirmButtonColor: "#1CA774",
                         confirmButtonText: 'Cool'
                     })
-                    form.reset()
+
+                } 
+                if (data.data.modifiedCount === 0) { 
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Already updated the same value',
+                        icon: 'error',
+                        iconColor: '#F15656',
+                        confirmButtonColor: "#1CA774",
+                        confirmButtonText: 'Cool'
+                    })
                 }
             })
-
-
+        } catch (error) {
+            console.error('Error updating job:', error);
+        }
     }
     // console.log(startDate)
     // console.log(jobDeadline) 
@@ -87,6 +92,7 @@ const UpdateJob = () => {
         if (job) {
             const { bannerUrl, title, category, postedBy, description, salaryRange, postingDate, deadline, applicants } = job
             // Convert postingDate 
+            setDesc(description)
             const postingDateString = new Date(postingDate).toLocaleDateString();
 
             // Convert deadline 
@@ -166,21 +172,32 @@ const UpdateJob = () => {
                                 <div className='grow w-full'>
                                     <label className=' text-sm  block mb-2 text font-medium'>Category<span className='text-red-500'> *</span></label>
                                     <select required name='category' className='  text-primary border border-primary px-6 py-[10px] rounded-md focus:outline-none w-full'>
-                                        <option className=' cursor-pointer' defaultValue={category} defaultChecked value="">Select Category</option>
-                                        <option className=' cursor-pointer' value="On Site,">On Site,</option>
-                                        <option className=' cursor-pointer' value=" Remote">Remote</option>
-                                        <option className=' cursor-pointer' value="Part-Time">Part-Time</option>
-                                        <option className=' cursor-pointer' value="Hybrid">Hybrid</option>
+                                        <option className=' cursor-pointer' defaultChecked value="">Select Category</option>
+                                        <option selected={category === "On Site"} className=' cursor-pointer' value="On Site,">On Site,</option>
+                                        <option className=' cursor-pointer' selected={category === "Remote"} value=" Remote">Remote</option>
+                                        <option selected={category === "Part-Time"} className=' cursor-pointer' value="Part-Time">Part-Time</option>
+                                        <option selected={category === "Hybrid"} className=' cursor-pointer' value="Hybrid">Hybrid</option>
                                     </select>
                                 </div>
                             </div>
                             <br />
                             <div className='grow w-full '>
                                 <label className=' text-sm  block mb-2 text font-medium'>Job Description<span className='text-red-500'> *</span></label>
-                                <textarea required defaultValue={description} onChange={(e) => setDesc(e.target.value)} placeholder='Write a description about this Job' className='border border-primary px-6 py-[10px] rounded-md focus:outline-none w-full  text-primary' name="" id="" cols="30" rows="4"></textarea>
+                                <textarea
+                                    required
+                                    value={desc}
+                                    onChange={(e) => setDesc(e.target.value)} // Update the description state
+                                    placeholder='Write a description about this Job'
+                                    className='border border-primary px-6 py-[10px] rounded-md focus:outline-none w-full text-primary'
+                                    name=""
+                                    id=""
+                                    cols="30"
+                                    rows="4"
+                                ></textarea>
+
                             </div>
                             <button
-                                className="mt-6 block bg-primary disabled:bg-[#9fdf96] w-full select-none rounded-lg py-2 text-white">Post Your Job</button>
+                                className="mt-6 block bg-primary disabled:bg-[#9fdf96] w-full select-none rounded-lg py-2 text-white">Update Your Job</button>
                         </form>
                     </div>
                 </div>
