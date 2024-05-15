@@ -21,12 +21,16 @@ const ViewDetails = () => {
     if (data) {
         const { _id, bannerUrl, title, salaryRange, description, postedBy, deadline, applicants, category } = data;
         const lastWord = title.split(" ").pop();
+        // Convert postingDate 
+
+        // Convert deadline 
+        const deadlineString = new Date(deadline).toLocaleDateString();
         console.log(lastWord);
         return (
             <div className='bg-[#F1F5F8] dark:bg-[#1c333a]'>
                 <div className="max-w-[350px]  md:max-w-screen-sm py-20 lg:max-w-[90%] mx-auto flex flex-col lg:flex-row gap-12 justify-evenly">
 
-                    <div className=" rounded-3xl shadow-md">
+                    <div className=" w-full rounded-3xl shadow-md">
                         <img className='rounded-t-3xl w-full' src={bannerUrl} alt="" />
                         <div className="p-6">
                             <div className='flex flex-col md:flex-row justify-normal gap-6 md:justify-between'>
@@ -43,7 +47,7 @@ const ViewDetails = () => {
                                     </div>
                                     <div className='mt-2 flex gap-6'>
                                         <span className='text-sm'>{applicants} Applicants </span>
-                                        <span className='text-sm text-primary'> Deadline : {deadline} </span>
+                                        <span className='text-sm text-primary'> Deadline : {deadlineString} </span>
                                     </div>
                                 </div>
                             </div>

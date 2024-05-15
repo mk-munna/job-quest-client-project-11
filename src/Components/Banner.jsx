@@ -2,6 +2,7 @@ import React from 'react';
 import { IoIosSearch, IoMdCheckmark } from 'react-icons/io';
 import { IoBagRemoveSharp } from 'react-icons/io5';
 import './Banner.css'
+import { motion } from "framer-motion";
 const Banner = () => {
     return (
         <div>
@@ -52,11 +53,49 @@ const Banner = () => {
                             </div>
                         </div>
 
-                        <div className=' gap-4 flex justify-end'>
+                        <div className='relative gap-4 flex justify-end'>
                             <div>
                                 <img className=' rounded-full lg:h-[180px] h-auto' src="https://i.ibb.co/CVNdPcm/bn-4.webp" alt="" />
                                 <img className='rounded-3xl mt-4 lg:h-[280px] h-auto' src="https://i.ibb.co/19fVfDv/bns-1.webp" alt="" />
                             </div>
+                            <motion.div
+                                className='w-[220px] font-Montserrat bg-white top-[20%] left-12 dark:bg-[#3d534b] shadow-xl absolute px-[12px] py-[8px] rounded-full'
+                                initial={{ opacity: 1, y: -20, x: -10 }}
+                                animate={{ opacity: 1, y: 50, x: -50 }}
+                                transition={{ duration: 25, repeat: Infinity, repeatType: 'reverse' }}
+
+                            >
+                                <div className='flex gap-4'>
+                                    <div>
+                                        <img className='rounded-full' width={40} src="https://i.ibb.co/s5mBkbP/download-1.jpg" alt="" />
+                                    </div>
+                                    <div>
+                                        <span className='block text-xl text-primary font-semibold'>480+</span>
+                                        <span className='block text-[12px]'>
+                                            Happpy Candidates
+                                        </span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                            <motion.div
+                                className='absolute top-[60%]'
+                                initial={{ opacity: 1, y: 50, x: -50 }}
+                                animate={{ opacity: 1, y: -100, x: 10 }}
+                                transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse' }}
+
+                            >
+                                <img src="https://i.ibb.co/ThMNkQ9/download.png" alt="" />
+                            </motion.div>
+                            <motion.div
+                                className='absolute'
+                                initial={{ opacity: 1, y: -20, x: -10 }}
+                                animate={{ opacity: 1, y: 50, x: -50 }}
+                                transition={{ duration: 15, repeat: Infinity, repeatType: 'reverse' }}
+
+                            >
+                                <img src="https://i.ibb.co/wdfTVw6/download-1.png" alt="" />
+                            </motion.div>
+
                             <div>
                                 <img className='rounded-3xl lg:h-[280px] h-auto' src="https://i.ibb.co/SRYsyRL/bn-2.webp" alt="" />
                                 <img className='rounded-full h-auto  lg:h-[180px] mt-4' src="https://i.ibb.co/VqWZhbz/bn-3.webp" alt="" />
