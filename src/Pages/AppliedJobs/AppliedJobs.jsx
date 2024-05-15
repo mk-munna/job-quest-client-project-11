@@ -128,7 +128,7 @@ const AppliedJobs = () => {
                         {/* filter form */}
                         <div className='flex justify-end lg:pr-48 items-center text-sm  gap-2'>
                             Filter By
-                            <select className='border border-primary px-2 text-[12px] py-1 rounded-full' onChange={e => setFilterOption(e.target.value)} name="" id="">
+                            <select className='border text-black border-primary px-2 text-[12px] py-1 rounded-full' onChange={e => setFilterOption(e.target.value)} name="" id="">
                                 <option value="">Category</option>
                                 <option value="All">All</option>
                                 <option value="Remote">Remote</option>
