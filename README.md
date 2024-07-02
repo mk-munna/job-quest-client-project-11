@@ -2,8 +2,6 @@
 
 # Website Name : JobQuest
 Live Website Url : [https://jobquest-4ccdb.web.app/]
-github Repo Client : [https://github.com/Porgramming-Hero-web-course/b9a11-client-side-mk-munna]
-github Repo Server : [https://github.com/Porgramming-Hero-web-course/b9a11-server-side-mk-munna]
 
 # Features 
 
