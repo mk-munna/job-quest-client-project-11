@@ -1,4 +1,3 @@
-# Assignment Category 0003
 
 # Website Name : JobQuest
 Live Website Url : [https://jobquest-4ccdb.web.app/]
